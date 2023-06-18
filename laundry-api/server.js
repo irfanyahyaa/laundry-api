@@ -15,9 +15,7 @@ app.use(cookieParser());
 app.use(express.static("app/public")); // folder public dalam folder app akan di define sebagai file static
 
 //Set app config
-const title = process.env.TITLE;
-const port = process.env.PORT || 3000;
-const baseUrl = process.env.URL + port;
+const port = process.env.PORT;
 
 // code ini merupakan bahasa native dari module CORS
 app.use((req, res, next) => {

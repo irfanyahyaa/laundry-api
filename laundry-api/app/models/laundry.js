@@ -30,7 +30,23 @@ module.exports = (sequelize, DataTypes) => {
     returnDate: DataTypes.DATE,
     weight: DataTypes.STRING,
     bill: DataTypes.INTEGER
-  }, {
+  }, 
+  {
+    hooks: {
+      afterCreate: async (laundry, option) => {
+        console.log('>> laundry afterCreate', sequelize?.models);
+        // query insert into logs
+        try {
+          await sequelize.models.AuditLog.create({
+            tableName: 'Laundries',
+            task: 'INSERT',
+            description: `Proses INSERT dengan data ${JSON.stringify(laundry.toJSON())}`
+          });
+        } catch(e) {
+          console.log('>> error laundry afterCreate', e);
+        }
+      },
+    },
     sequelize,
     modelName: 'Laundry',
   });

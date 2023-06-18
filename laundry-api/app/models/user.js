@@ -31,15 +31,14 @@ module.exports = (sequelize, DataTypes) => {
         try {
           await sequelize.models.AuditLog.create({
             tableName: 'Users',
-            task: 'insert',
-            description: `Proses Insert dengan data ${JSON.stringify(user.toJSON())}`
+            task: 'INSERT',
+            description: `Proses INSERT dengan data ${JSON.stringify(user.toJSON())}`
           });
         } catch(e) {
           console.log('>> error user afterCreate', e);
         }
-      }
-    }
-  }, {
+      },
+    },
     sequelize,
     modelName: 'User',
   });
